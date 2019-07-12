@@ -6,7 +6,7 @@ from sys import exit
 
 pygame.init()
 
-screen=pygame.display.set_mode((640, 480), 0, 32)
+screen=pygame.display.set_mode((510, 240), 0, 32)#ajuste de ventana para imagen de fondo
 pygame.display.set_caption("Fight Fighter")
 background=pygame.image.load(fondo).convert()
 mouse_cursor=pygame.image.load(personaje).convert()
