@@ -4,16 +4,16 @@ from pygame.locals import *
  
  
 # Constantes
-WIDTH = 900
-HEIGHT = 500
-MposX =300
+WIDTH = 1300
+HEIGHT = 650
+MposX1 =10
  
  
 cont=6
 direc=True
 i=0
-xixf={}#xinicial y xfinal
-Rxixf={}
+p1={}#xinicial y xfinal
+Rp1={}
 #===========================================================
 #=================IMAGEN====================================
  
@@ -30,24 +30,24 @@ def imagen(filename, transparent=False):
  
 #======================TECLADO===================================
 #================================================================
-def teclado():
-    teclado = pygame.key.get_pressed()
+def teclado1():
+    teclado1 = pygame.key.get_pressed()
      
-    global MposX
+    global MposX1
     global cont, direc
    
        
-    if teclado[K_RIGHT]:
-        MposX+=2
+    if teclado1[K_d]:
+        MposX1+=2
         cont+=1
         direc=True
-    elif teclado[K_LEFT]:
-        MposX-=2
+    elif teclado1[K_a]:
+        MposX1-=2
         cont+=1
         direc=False
-    elif teclado[K_q]:
+    elif teclado1[K_q]:
         #SALTO
-        MposX-=2
+        MposX1-=2
     #else :
          #cont=6
        
@@ -56,23 +56,23 @@ def teclado():
  
 #===================SPRITE===============================
 #========================================================
-def sprite():
+def sprite1():
  
     global cont
  
-    xixf[0]=(0,0,20,41)
-    xixf[1]=(22,0,25,41)
-    xixf[2]=(47,0,25,41)
-    xixf[3]=(73,0,20,41)
-    xixf[4]=(93,0,27,41)
-    xixf[5]=(120,0,27,41)
+    p1[0]=(0,0,161,300)
+    p1[1]=(161,0,135,300)
+    p1[2]=(296,0,137,300)
+    p1[3]=(433,0,146,300)
+    p1[4]=(585,0,155,300)
+    p1[5]=(734,0,135,300)
    
-    Rxixf[0]=(122,0,22,41)
-    Rxixf[1]=(96,0,25,41)
-    Rxixf[2]=(74,0,22,41)
-    Rxixf[3]=(50,0,23,41)
-    Rxixf[4]=(24,0,26,41)
-    Rxixf[5]=(0,0,25,41)
+    Rp1[0]=(719,0,161,300)
+    Rp1[1]=(565,0,140,300)
+    Rp1[2]=(425,0,155,300)
+    Rp1[3]=(275,0,155,300)
+    Rp1[4]=(130,0,155,300)
+    Rp1[5]=(0,0,149,300)
    
     p=6
    
@@ -124,20 +124,20 @@ def main():
        
         time = clock.tick(60)
        
-        sprite()
-        teclado()
+        sprite1()
+        teclado1()
        
        
    
-        fondo = pygame.transform.scale(fondo, (1000, 400))
+        fondo = pygame.transform.scale(fondo, (1300, 650))
              
         screen.blit(fondo, (0, 0))
        
         if direc==True:
-            screen.blit(mario, ( MposX, 318),(xixf[i]))
+            screen.blit(personaje1, ( MposX1, 350),(p1[i]))
    
         if direc==False:
-            screen.blit(mario_inv, ( MposX, 318),(Rxixf[i]))
+            screen.blit(personaje1_inv, ( MposX1, 350),(Rp1[i]))
    
         pygame.display.flip()
        
