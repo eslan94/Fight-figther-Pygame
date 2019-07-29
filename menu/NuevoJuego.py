@@ -5,7 +5,6 @@ from random import randint
 from sys import exit
 import sys
 import time
-import os
 
 tinicial=time.strftime("%H:%M:%S")
 print ("Tiempo Inicial: " + tinicial)
@@ -209,8 +208,6 @@ class Barravidaminicell(Sprite):
                         self.rect.x += 6
                         kamehameha.rect.x = 900
 
-
-
 if __name__ == '__main__':
     # Variables.
     salir = False
@@ -301,25 +298,17 @@ if __name__ == '__main__':
         if personaje.muerto == 1:
             pygame.time.delay(3000)
             salir = True
-            pygame.quit()
-            os.system("menu_mejorado.py")
-            quit()
         elif minicell.muerto == 1:
             pygame.time.delay(3000)
             salir = True
-            pygame.quit()
-            os.system("menu_mejorado.py")
-            quit()
         temporizador.tick(60)
 
         # gestion de eventos
         for evento in pygame.event.get():
-            if evento.type == QUIT:
-                salir = True
-
-
-pygame.quit()
-quit()
+            if evento.type == pygame.QUIT:
+                    salir = True
+                    pygame.quit() #detenemos todos los modulos
+                    sys.exit()
 tfinal=time.strftime("%H:%M:%S")
 print("Tiempo Final: " + tfinal)
 tiempo()

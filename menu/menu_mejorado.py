@@ -2,9 +2,10 @@ import sys
 import random
 import pygame
 from pygame.locals import *
+import os
 
-largoV = 756
-anchoV = 945
+largoV = 500
+anchoV = 200
 
 class Opcion:
 
@@ -121,6 +122,9 @@ class Menu:
             opcion.imprimir(screen)
 
 def comenzar_nuevo_juego():
+    pygame.quit()
+    os.system("NuevoJuego.py")
+    quit()
     print (" Función que muestra un nuevo juego.")
 
 def mostrar_opciones():
@@ -149,9 +153,9 @@ if __name__ == '__main__':
     pygame.font.init()
     pygame.mixer.init()
 
-    screen = pygame.display.set_mode((945, 756))
+    screen = pygame.display.set_mode((500, 200))
     fondo = pygame.image.load("fondo2.jpg").convert()
-    fondo = pygame.transform.scale(fondo,(anchoV,largoV))
+    fondo = pygame.transform.scale(fondo, (500, 200))
     pygame.display.set_caption("Menu Principal")    
     pygame.mixer.music.load("fondoMenu.mp3")
     pygame.mixer.music.play()
@@ -169,3 +173,6 @@ if __name__ == '__main__':
 
         pygame.display.flip()
         pygame.time.delay(10)
+
+pygame.quit()
+quit()
