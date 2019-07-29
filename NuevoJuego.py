@@ -4,6 +4,10 @@ from pygame.sprite import Sprite
 from random import randint
 from sys import exit
 import sys
+import time
+
+tinicial=time.strftime("%H:%M:%S")
+print ("Tiempo Inicial: " + tinicial)
 
 pygame.init()
 # Constantes
@@ -34,21 +38,29 @@ Rp2={}
 #=================IMAGEN====================================
  
 def crear():
-  archivo=open('puntaje.txt','w')
-  archivo.close()
+  archi=open('puntaje.txt','w')
+  archi.close()
 
 #funciones para crear y guardar archivos planos
 def ptotal():
     global puntaje2,total1,puntaje1,total2
-    total1+=puntaje1
-    total2+=puntaje2
-    archi=open('puntaje.txt','a')
+    total1=puntaje1
+    total2=puntaje2
+    archi=open('puntaje.txt','w')
     archi.write('Puntaje del Jugador1 : ')
     archi.write(str(total1)+'\n')
     archi.write('Puntaje del Jugador 2: ')
     archi.write(str(total2)+'\n')
     archi.close()
 
+def tiempo():
+    global tinicial, tfinal
+    archi=open('puntaje.txt', 'a')
+    archi.write('Tiempo Inicial: ')
+    archi.write(tinicial+'\n')
+    archi.write('Tiempo Final: ')
+    archi.write(tfinal+'\n')
+    archi.close()
 
 def imagen(filename, transparent=False):
         try: image = pygame.image.load(filename)
@@ -71,27 +83,27 @@ class Personaje(Sprite):
     def update(self):
         teclas = pygame.key.get_pressed()
         #asignacion de teclas al personaje 1
-        if teclas[K_SPACE]:
+        if teclas[K_f]:
             self.image = personaje = pygame.image.load("Personajes/gokukamehameha.png").convert_alpha()
             self.sonidoDisparo.play()#Ejecucion al momento de evento
             
         elif kamehameha.rect.x > 860:
             self.image = personaje = pygame.image.load("Personajes/goku.png").convert_alpha()
 
-        if teclas[K_LEFT]:
+        if teclas[K_a]:
             self.image = personaje = pygame.image.load("Personajes/gokuleft.png").convert_alpha()
             if self.rect.x > 0:
                 self.rect.x -= 10
-        elif teclas[K_RIGHT]:
+        elif teclas[K_d]:
             self.image = personaje = pygame.image.load("Personajes/gokuright.png").convert_alpha()
             if self.rect.x < 740:
                 self.rect.x += 10
 
-        if teclas[K_UP]:
+        if teclas[K_w]:
             self.image = personaje = pygame.image.load("Personajes/gokuup.png").convert_alpha()
             if self.rect.y > 32:
                 self.rect.y -= 10
-        elif teclas[K_DOWN]:
+        elif teclas[K_s]:
             if self.rect.y < 530:
                 self.image = personaje = pygame.image.load("Personajes/gokudown.png").convert_alpha()
                 self.rect.y += 10
@@ -104,7 +116,7 @@ class Kamehameha(Sprite):
     def update(self):
         teclas = pygame.key.get_pressed()
         if self.rect.x > 840:
-            if teclas[K_SPACE]:
+            if teclas[K_f]:
                 self.rect.x = (personaje.rect.x + 60)
                 self.rect.y = (personaje.rect.y + 14)
         if self.rect.x < 870:
@@ -142,27 +154,27 @@ class Minicell(Sprite):
         
     def update(self):
         teclas = pygame.key.get_pressed()
-        if teclas[K_e]:
+        if teclas[K_j]:
             self.image = personaje = pygame.image.load("Personajes/minicell.png").convert_alpha()
             self.sonidoDisparo2.play()
             
         elif kamehameha.rect.x > 860:
             self.image = personaje = pygame.image.load("Personajes/minicell.png").convert_alpha()
 
-        if teclas[K_a]:
+        if teclas[K_LEFT]:
             self.image = personaje = pygame.image.load("Personajes/minicell.png").convert_alpha()
             if self.rect.x > 0:
                 self.rect.x -= 10
-        elif teclas[K_d]:
+        elif teclas[K_RIGHT]:
             self.image = personaje = pygame.image.load("Personajes/minicell.png").convert_alpha()
             if self.rect.x < 740:
                 self.rect.x += 10
 
-        if teclas[K_w]:
+        if teclas[K_UP]:
             self.image = personaje = pygame.image.load("Personajes/minicell.png").convert_alpha()
             if self.rect.y > 32:
                 self.rect.y -= 10
-        elif teclas[K_s]:
+        elif teclas[K_DOWN]:
             if self.rect.y < 530:
                 self.image = personaje = pygame.image.load("Personajes/minicell.png").convert_alpha()
                 self.rect.y += 10
@@ -175,7 +187,7 @@ class Disparo(Sprite):
     def update(self):
         teclas = pygame.key.get_pressed()
         if self.rect.x == -400:
-            if teclas[K_e]:#al presionar la tecla se ejecuta el evento
+            if teclas[K_j]:#al presionar la tecla se ejecuta el evento
                 self.rect.x = (minicell.rect.x - 60) #hacia donde avanza el disparo
                 self.rect.y = (minicell.rect.y - 14)
         if self.rect.x > -400:
@@ -233,22 +245,25 @@ if __name__ == '__main__':
         minicell.update()
         disparo.update()
 
-        #if kamehameha.rect.y >= minicell.rect.y:
-        #    if kamehameha.rect.y <= (minicell.rect.y + 62):
-        #        if kamehameha.rect.x >= minicell.rect.x:
-        #           if kamehameha.rect.x <= (minicell.rect.x + 43):
-        #               kamehameha.rect.x = 900
-        #               puntaje1 += 15
-
+        if kamehameha.rect.y >= minicell.rect.y:
+            if kamehameha.rect.y <= (minicell.rect.y + 62):
+                if kamehameha.rect.x >= minicell.rect.x:
+                   if kamehameha.rect.x <= (minicell.rect.x + 43):
+                       barravidaminicell.rect.x += 26
+                       kamehameha.rect.x = 900
+                       puntaje1 += 15
+                       ptotal1=puntaje1
+                       
         #verifica si hay colision para sumar/restar puntaje
         if disparo.rect.y >= (personaje.rect.y - 56):
             if disparo.rect.y <= (personaje.rect.y + 62):
                 if disparo.rect.x >= personaje.rect.x:
                     if disparo.rect.x <= (personaje.rect.x + 43):
                         barravidagoku.rect.x -= 26
-                        puntaje1=-10
                         disparo.rect.x = -400
                         puntaje2+= 15
+                        ptotal2=puntaje2
+                        
 
 
         #actualizacion de objetos
@@ -256,8 +271,7 @@ if __name__ == '__main__':
         barravidaminicell.update()
         minicell.update()
         disparo.update()
-
-
+        ptotal()
 
 
 
@@ -293,6 +307,8 @@ if __name__ == '__main__':
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
                     salir = True
-                    ptotal()
                     pygame.quit() #detenemos todos los modulos
                     sys.exit()
+tfinal=time.strftime("%H:%M:%S")
+print("Tiempo Final: " + tfinal)
+tiempo()

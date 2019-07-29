@@ -1,0 +1,4 @@
+Puntaje del Jugador1 : 0
+Puntaje del Jugador 2: 105
+Tiempo Inicial: 01:25:42
+Tiempo Final: 01:25:48
