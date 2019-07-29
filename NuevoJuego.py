@@ -63,6 +63,12 @@ def tiempo():
     archi.write(tfinal+'\n')
     archi.close()
 
+def tiempojuego():
+	time = int(pygame.time.get_ticks()/1000)
+	screen.blit(pygame.font.SysFont("tahoma", 20).render('Tiempo de juego: '+str(time),True,blanco), (300,5))
+	
+
+
 def imagen(filename, transparent=False):
         try: image = pygame.image.load(filename)
         except pygame.error.message:
@@ -223,7 +229,7 @@ if __name__ == '__main__':
 
     # Establezco el título.
     pygame.display.set_caption("DBZ fighter")
-
+    
     # Creo dos objetos surface.
     fondo = pygame.image.load("Personajes/namek.jpg").convert()
     cuadrovidagoku = pygame.image.load("Personajes/cuadrovidagoku.png").convert_alpha()
@@ -247,6 +253,7 @@ if __name__ == '__main__':
         kamehameha.update()
         minicell.update()
         disparo.update()
+        
 
         if kamehameha.rect.y >= minicell.rect.y:
             if kamehameha.rect.y <= (minicell.rect.y + 62):
@@ -290,6 +297,7 @@ if __name__ == '__main__':
         screen.blit(cuadrovidaminicell, (608,0))
         screen.blit(pygame.font.SysFont("tahoma", 20).render("Puntacion 1: " + str(puntaje1), True, blanco), (0,40))
         screen.blit(pygame.font.SysFont("tahoma", 20).render("Puntacion 2: " + str(puntaje2), True, blanco), (600,40))
+        tiempojuego()
 
 
         if personaje.muerto == 1:
