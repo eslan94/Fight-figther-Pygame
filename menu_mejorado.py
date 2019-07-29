@@ -137,7 +137,10 @@ def mostrar_opciones():
 
 
 def creditos():
-    print (" Función que muestra los creditos del programa.")
+    print ("JUEGO ELABORADO POR:","\n")
+    print ("CALVOPIÑA ESTEBAN","\n")
+    print ("MORALES CHANTAL","\n")
+    print ("VASQUEZ JONATHAN","\n")
 
 def salir_del_programa():
     import sys
