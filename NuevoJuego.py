@@ -66,7 +66,7 @@ def tiempo():
 def tiempojuego():
 	time = int(pygame.time.get_ticks()/1000)
 	screen.blit(pygame.font.SysFont("tahoma", 20).render('Tiempo de juego: '+str(time),True,blanco), (300,5))
-	
+
 
 
 def imagen(filename, transparent=False):
@@ -274,6 +274,7 @@ if __name__ == '__main__':
                         puntaje2+= 15
                         ptotal2=puntaje2
                         
+
 
 
         #actualizacion de objetos

@@ -128,7 +128,13 @@ def comenzar_nuevo_juego():
     print (" Función que muestra un nuevo juego.")
 
 def mostrar_opciones():
-    print (" Función que muestra otro menú de opciones.")
+    archi=open('puntaje.txt', 'r')
+    linea=archi.readline()
+    while linea!="":
+        print (linea)
+        linea=archi.readline()
+    archi.close()
+
 
 def creditos():
     print (" Función que muestra los creditos del programa.")
